@@ -30,7 +30,7 @@ jobs:
     # Build the Docker image
     - name: Build 
       run: |
-        docker build -t gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:lastest
+        docker build -t "gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:lastest"
     
     # Push the Docker image   
     - name: Push  
