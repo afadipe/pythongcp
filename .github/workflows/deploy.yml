@@ -27,19 +27,23 @@ jobs:
         gcloud auth configure-docker
       
     # Build the Docker image
-    - name: Build & Publish
+    - name: Build 
       run: |
-        gcloud config set project ${{ secrets.GCP_PROJECT }}
-        gcloud config set run/region us-central1
-        docker build -t gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}
-        docker push gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}
+        docker build -t gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:lastest
+    
+    # Push the Docker image   
+    - name: Push  
+      run: |
+        docker push gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:lastest
         
       
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |
         gcloud run deploy ${{ secrets.GCP_APPLICATION }} 
+        --region europe-west1 \
         --image gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }} \
         --platform managed \
         --allow-unauthenticated \
+        --project ${{ secrets.GCP_PROJECT }} \
         --memory 512M
