@@ -38,18 +38,11 @@ jobs:
         gcloud builds submit --tag gcr.io/$PROJECT_ID/$PROJECT_ID:$GITHUB_SHA
     
     # Push the Docker image   
-    - name: Push  
+    - name: Deploy  
       run: |
-        gcloud run deploy $PROJECT_ID --image gcr.io/$PROJECT_ID/$PROJECT_ID:$GITHUB_SHA --platform managed --region $RUN_REGION
-        
-      
-    # Deploy the Docker image to the GKE cluster
-    - name: Deploy
-      run: |
-        gcloud run deploy ${{ secrets.GCP_APPLICATION }} 
-        --region europe-west1 \
-        --image gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }} \
-        --platform managed \
+        gcloud run deploy $PROJECT_ID 
+        --image gcr.io/$PROJECT_ID/$PROJECT_ID:$GITHUB_SHA 
+        --platform managed
         --allow-unauthenticated \
-        --project ${{ secrets.GCP_PROJECT }} \
-        --memory 512M
+        --region $RUN_REGION
+        
