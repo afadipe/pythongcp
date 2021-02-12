@@ -21,11 +21,11 @@ jobs:
     # Setup gcloud CLI
     - name: Setup GCP Credentials
       uses: google-github-actions/setup-gcloud@v0.2.0
-      with:  
+      with:   
         #service_account_email: ${{ secrets.GCP_EMAIL }}
         service_account_key: ${{ secrets.GCP_CREDENTIALS }}
         project_id: ${{ secrets.GCP_PROJECT }}
-        #export_default_credentials: true
+        export_default_credentials: true
     
     # Configure Docker with Credentials
     - name: Configure Docker
