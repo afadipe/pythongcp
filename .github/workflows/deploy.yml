@@ -4,6 +4,7 @@ on:
     branches: master
   push:
     branches: master
+    
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT }}
