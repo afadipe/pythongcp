@@ -10,6 +10,7 @@ In order to deploy this project on your own you just need to take the following 
 The first step will be to create a service account by going to your [GCP Console Service Account Admin](https://console.cloud.google.com/iam-admin/serviceaccounts).
 
 After which will need to give the service account the following roles.
+ - Cloud Run Admin
  - Cloud Build Service Account
  - Cloud Build Editor
  - Service Account User
